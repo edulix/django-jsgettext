@@ -90,13 +90,13 @@ plural_simple_template = """
 """
 
 I18N_VIEW_CACHE_TIMEOUT = getattr(settings, 'I18N_VIEW_CACHE_TIMEOUT', 20)
-
+I18N_VIEW_DEFAULT_APPS = getattr(settings, 'I18N_VIEW_DEFAULT_APPS', [])
 
 class I18n(View):
     domains = ['djsgettext', 'djangojs']
-    packages = []
+    packages = I18N_VIEW_DEFAULT_APPS
 
-    #@method_decorator(cache_page(I18N_VIEW_CACHE_TIMEOUT))
+    @method_decorator(cache_page(I18N_VIEW_CACHE_TIMEOUT))
     def dispatch(self, *args, **kwargs):
         return super(I18n, self).dispatch(*args, **kwargs)
 

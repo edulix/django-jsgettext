@@ -21,7 +21,8 @@ generates a djgettext domain po file from ``.html`` files (javascript templates)
 exposes the two gettext domains to the javascript.
 
 .. note::
-    The new view is created because the primary view of django is monolitic and not permits expose domains distinct than ``djangojs`` and ``django``.
+    The new view is created because the primary view of django is monolitic and not permits expose domains
+    distinct than ``djangojs`` and ``django``.
 
 Currently, only is tested with underscore templates. Example:
 
@@ -92,3 +93,23 @@ I18N_VIEW_CACHE_TIMEOUT  in settings.py (in seconds):
 
     # cache i18n for 15 mins
     I18N_VIEW_CACHE_TIMEOUT = 60*15
+
+You should also set the django apps for which you want the
+I18N view to output translated messages for in settings.py:
+
+.. code-block:: python
+
+    I18N_VIEW_DEFAULT_APPS = ['someapp', 'anotherapp']
+
+You can also use this view in an isolated way or simply
+in a more custom manner settings the packages (django apps,
+overriding I18n_VIEW_DEFAULT_APPS) and/or domains
+parameters for the view in urls.py:
+
+.. code-block:: python
+
+    from djsgettext.views import I18n
+
+    urlpatterns = patterns('',
+        url(r'^js-gettext/$', I18n.as_view(packages=['someapp']), name="jsgettext"),
+    )
