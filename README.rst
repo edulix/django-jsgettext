@@ -95,16 +95,19 @@ I18N_VIEW_CACHE_TIMEOUT  in settings.py (in seconds):
     I18N_VIEW_CACHE_TIMEOUT = 60*15
 
 You should also set the django apps for which you want the
-I18N view to output translated messages for in settings.py:
+I18N view to output translated messages for in settings.py,
+using the standard LOCALE_PATHS variable:
 
 .. code-block:: python
 
-    I18N_VIEW_DEFAULT_APPS = ['someapp', 'anotherapp']
+    LOCALE_PATHS = (
+        os.path.join(ROOT_PATH, 'locale'),
+    )
 
 You can also use this view in an isolated way or simply
-in a more custom manner settings the packages (django apps,
-overriding I18n_VIEW_DEFAULT_APPS) and/or domains
-parameters for the view in urls.py:
+in a more custom manner setting the packages and/or domains
+parameters for the view in urls.py. Note that the locale paths
+will still be added to the list of packages:
 
 .. code-block:: python
 

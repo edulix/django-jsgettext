@@ -29,7 +29,7 @@ template_body = """
         }
     };
 
-    var ngettext =(singular, plural, count) {
+    var ngettext = function(singular, plural, count) {
         value = catalog[singular];
         if (typeof(value) == 'undefined') {
             return (count == 1) ? singular : plural;
@@ -63,7 +63,6 @@ template_body = """
     };
 """
 
-
 template_footer = """
     this.gettext = gettext;
     this.ngettext = ngettext;
@@ -90,11 +89,10 @@ plural_simple_template = """
 """
 
 I18N_VIEW_CACHE_TIMEOUT = getattr(settings, 'I18N_VIEW_CACHE_TIMEOUT', 20)
-I18N_VIEW_DEFAULT_APPS = getattr(settings, 'I18N_VIEW_DEFAULT_APPS', [])
 
 class I18n(View):
     domains = ['djsgettext', 'djangojs']
-    packages = I18N_VIEW_DEFAULT_APPS
+    packages = []
 
     @method_decorator(cache_page(I18N_VIEW_CACHE_TIMEOUT))
     def dispatch(self, *args, **kwargs):
