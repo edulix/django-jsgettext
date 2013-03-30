@@ -85,7 +85,7 @@ plural_idx_template = """
 """
 
 plural_simple_template = """
-    var pluralidx function(count) { return (count == 1) ? 0 : 1; };
+    var pluralidx = function(count) { return (count == 1) ? 0 : 1; };
 """
 
 I18N_VIEW_CACHE_TIMEOUT = getattr(settings, 'I18N_VIEW_CACHE_TIMEOUT', 20)
